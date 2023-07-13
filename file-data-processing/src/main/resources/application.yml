@@ -1,0 +1,24 @@
+spring:
+  spark:
+    app-name: "Spark file batch processing"
+
+  data:
+    cassandra:
+      contact-points: 127.0.0.1
+
+  kafka:
+    bootstrap-servers:  "localhost:9092"
+    consumer:
+      group-id: file-data-processing
+com:
+  tzachi:
+    data-engine:
+      brokers: "localhost:9092"
+      file-data-processing:
+        vehicle-status:
+          consume-from-topic:
+            name: fct.vehicle_status_file_name.timestamp
+            concurrency: 1
+          processing:
+            # shuffles the data across the cluster
+            repartition: 1

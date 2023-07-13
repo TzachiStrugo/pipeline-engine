@@ -1,0 +1,25 @@
+{
+  "vehicles_events": [{
+    "vehicle_id": "ebab5f787798416fb2b8afc1340d7a4e",
+    "event_time": "2022-06-05T21:02:34.546Z",
+    "event_source": "mobile",
+    "event_type": "start_drive",
+    "event_value": "-79.9074173,9.3560572",
+    "event_extra_data:": {
+      "note": "the device is working properly",
+      "boot_time": 12
+    }
+  },
+    {
+      "vehicle_id": "ebae3f787798416fb2b8afc1340d7a6d",
+      "event_time": "2022-06-06T00:02:34.546Z",
+      "event_source": "device",
+      "event_type": "door_open",
+      "event_value": "driver_door",
+      "event_extra_data:": {
+        "note": "a rare event, that is usually caused by accident ",
+        "emergency_call": true
+      }
+    }
+  ]
+}

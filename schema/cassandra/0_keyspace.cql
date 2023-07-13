@@ -1,0 +1,1 @@
+CREATE KEYSPACE IF NOT EXISTS vehicles_keyspace with replication = {'class':'SimpleStrategy', 'replication_factor':1};

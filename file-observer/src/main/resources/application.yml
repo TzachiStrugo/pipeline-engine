@@ -1,0 +1,57 @@
+com:
+  tzachi:
+    data-engine:
+      brokers: "localhost:9092"
+      # TODO TS:
+      # 1. directory watcher is used to separate the processing of files from consuming
+      # 2. Storage type can be local but to support better scalability and fault tolerance implementation should change to one of the follows :
+      # 2.1 distribute file system (HDFS)
+      # 2.2 cloud object storage
+      #
+      # reading huge files of all vichel status  can be in efficent processing tech:
+      # 1. consider using chuncks or line by line - enable efficient processing of large files withoult overwhelming memeory usages,
+      #  Jaxson allows us to do it
+      file-observer:
+        vehicle-events:
+          file-pattern: "^vehicles_events_([0-9]+|\\d{10})\\.json$"
+          storage:
+            type: local
+            config:
+              directory: /Users/user/git/pipeline-engine/file-observer/inbound_file_events
+          processing:
+            # message_processing: multiple small file sources
+            # Store offset on last timestamp file
+            type: message_processing
+            produce-to-topic:
+              name: fct.vehicle_events_file_name.timestamp
+              partitions: 1
+              replication-factor: 1
+            config:
+              # partitioner: fileNmae
+              # increase performance and scalability when need to ingest multiple files
+              # Not implemented
+              tasks-number: 1
+              # number of files read for source and load to kafka
+              limit-batch-size: 1
+
+        vehicle-status-events:
+          file-pattern: "^vehicles_status_([0-9]+|\\d{10})\\.json$"
+          storage:
+            type: local
+            config:
+              directory: /Users/user/git/pipeline-engine/file-observer/inbound_file_events
+          processing:
+            # message_processing: multiple small file sources
+            # Store offset on last timestamp file
+            type: message_processing
+            produce-to-topic:
+              name: fct.vehicle_status_file_name.timestamp
+              partitions: 1
+              replication-factor: 1
+            config:
+              # partitioner: fileNmae
+              # increase performance and scalability when need to ingest multiple files
+              # Not implemented
+              tasks-number: 1
+              # number of files read for source and load to kafka
+              limit-batch-size: 1
